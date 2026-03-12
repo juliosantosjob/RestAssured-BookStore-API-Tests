@@ -17,12 +17,13 @@ import static com.toolsqa.bookstore.utils.Helpers.generateToken;
 import static com.toolsqa.bookstore.utils.Helpers.readJson;
 import static org.apache.http.HttpStatus.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
-import static org.hamcrest.Matchers.equalTo;
+import static org.hamcrest.CoreMatchers.equalTo;
 
-@Tag("gerenciar_livros")
 @Tag("regression")
+@Tag("gerenciar_livros")
+@DisplayName("Testes de gerenciamento de livros")
 public class BookManagementTest extends BaseTest {
-    JsonNode data = readJson("src/test/java/resources/data/listBooks.json");
+    JsonNode data = readJson("src/test/resources/data/listBooks.json");
     JsonNode booksNode = data.get("books");
 
     int size = booksNode.size();
@@ -35,7 +36,10 @@ public class BookManagementTest extends BaseTest {
         response = getBooks();
         response.then()
                 .statusCode(SC_OK)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/bookManagement/list-books-success.json"));
+                .body("books[0].isbn", equalTo("9781449325862"))
+                .body("books[0].title", equalTo("Git Pocket Guide"))
+                .body("books[0].author", equalTo("Richard E. Silverman"))
+                .body(matchesJsonSchemaInClasspath("contracts/bookManagement/list-books-success.json"));
     }
 
     @Test
@@ -57,7 +61,7 @@ public class BookManagementTest extends BaseTest {
         response = addBookToCollection(token, books);
         response.then()
                 .statusCode(SC_CREATED)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/bookManagement/add-book-success.json"));
+                .body(matchesJsonSchemaInClasspath("contracts/bookManagement/add-book-success.json"));
 
         deleteBooks(userId, token)
                 .then()
@@ -82,7 +86,9 @@ public class BookManagementTest extends BaseTest {
         response = addBookToCollection(token, books);
         response.then()
                 .statusCode(SC_BAD_REQUEST)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/bookManagement/add-book-invalid-isbn.json"));
+                .body("code", equalTo("1205"))
+                .body("message", equalTo("ISBN supplied is not available in Books Collection!"))
+                .body(matchesJsonSchemaInClasspath("contracts/bookManagement/add-book-invalid-isbn.json"));
     }
 
     @Test
@@ -98,7 +104,9 @@ public class BookManagementTest extends BaseTest {
         response = deleteBooks("0000000000000000", token);
         response.then()
                 .statusCode(SC_UNAUTHORIZED)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/bookManagement/delete-book-invalid-user.json"));
+                .body("code", equalTo("1207"))
+                .body("message", equalTo("User Id not correct!"))
+                .body(matchesJsonSchemaInClasspath("contracts/bookManagement/delete-book-invalid-user.json"));
     }
 
 }

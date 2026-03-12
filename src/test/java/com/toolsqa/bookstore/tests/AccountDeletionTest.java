@@ -12,8 +12,9 @@ import static org.apache.http.HttpStatus.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
 
-@Tag("deletar_conta")
 @Tag("regression")
+@Tag("deletar_conta")
+@DisplayName("Testes de deleção de conta")
 public class AccountDeletionTest extends BaseTest {
 
     @Test
@@ -44,7 +45,7 @@ public class AccountDeletionTest extends BaseTest {
                 .statusCode(SC_OK)
                 .body("code", equalTo("1207"))
                 .body("message", equalTo("User Id not correct!"))
-                .body(matchesJsonSchemaInClasspath("resources/contracts/deleteUser/delete-user-invalid-id.json"));
+                .body(matchesJsonSchemaInClasspath("contracts/deleteUser/delete-user-invalid-id.json"));
     }
 
 

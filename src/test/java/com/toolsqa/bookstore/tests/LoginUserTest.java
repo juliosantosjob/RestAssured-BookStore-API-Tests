@@ -7,19 +7,19 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import static com.toolsqa.bookstore.utils.ConfigProp.getProp;
-import static org.apache.http.HttpStatus.SC_BAD_REQUEST;
 import static org.apache.http.HttpStatus.SC_OK;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.*;
 
-@Tag("fazer_login")
 @Tag("regression")
+@Tag("fazer_login")
+@DisplayName("Testes de login de usuário")
 public class LoginUserTest extends BaseTest {
 
     @Test
     @Tag("login_com_sucesso")
     @DisplayName("Login com sucesso")
     void shouldLoginSuccessfully() {
-
         UserModel user = new UserModel(
                 getProp("USERNAME_VALID"),
                 getProp("PASSWORD_VALID")
@@ -28,14 +28,17 @@ public class LoginUserTest extends BaseTest {
         response = loginUser(user);
         response.then()
                 .statusCode(SC_OK)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/login/login-success.json"));
+                .body("token", notNullValue())
+                .body("expires", notNullValue())
+                .body("status", equalTo("Success"))
+                .body("result", equalTo("User authorized successfully."))
+                .body(matchesJsonSchemaInClasspath("contracts/login/login-success.json"));
     }
 
     @Test
     @Tag("username_invalido")
     @DisplayName("Login com username inválido")
     void shouldNotLoginWithInvalidUsername() {
-
         UserModel user = new UserModel(
                 "invalidUser",
                 getProp("PASSWORD_VALID")
@@ -43,8 +46,9 @@ public class LoginUserTest extends BaseTest {
 
         response = loginUser(user);
         response.then()
-                .statusCode(SC_OK)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/login/login-failed.json"));
+                .body("status", equalTo("Failed"))
+                .body("result", equalTo("User authorization failed."))
+                .body(matchesJsonSchemaInClasspath("contracts/login/login-failed.json"));
     }
 
     @Test
@@ -58,8 +62,9 @@ public class LoginUserTest extends BaseTest {
 
         response = loginUser(user);
         response.then()
-                .statusCode(SC_OK)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/login/login-failed.json"));
+                .body("status", equalTo("Failed"))
+                .body("result", equalTo("User authorization failed."))
+                .body(matchesJsonSchemaInClasspath("contracts/login/login-failed.json"));
     }
 
     @Test
@@ -73,8 +78,9 @@ public class LoginUserTest extends BaseTest {
 
         response = loginUser(user);
         response.then()
-                .statusCode(SC_OK)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/login/login-failed.json"));
+                .body("status", equalTo("Failed"))
+                .body("result", equalTo("User authorization failed."))
+                .body(matchesJsonSchemaInClasspath("contracts/login/login-failed.json"));
     }
 
     @Test
@@ -88,8 +94,9 @@ public class LoginUserTest extends BaseTest {
 
         response = loginUser(user);
         response.then()
-                .statusCode(SC_BAD_REQUEST)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/login/login-empty-field.json"));
+                .body("code", equalTo("1200"))
+                .body("message", equalTo("UserName and Password required."))
+                .body(matchesJsonSchemaInClasspath("contracts/login/login-empty-field.json"));
     }
 
     @Test
@@ -103,7 +110,9 @@ public class LoginUserTest extends BaseTest {
 
         response = loginUser(user);
         response.then()
-                .statusCode(SC_BAD_REQUEST)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/login/login-empty-field.json"));
+                .body("code", equalTo("1200"))
+                .body("message", equalTo("UserName and Password required."))
+                .body(matchesJsonSchemaInClasspath("contracts/login/login-empty-field.json"));
     }
+
 }

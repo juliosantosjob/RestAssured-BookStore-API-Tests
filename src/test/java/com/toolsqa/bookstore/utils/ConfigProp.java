@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 public class ConfigProp {
-    private static final String PATH_PROP = "/src/test/java/resources/config.properties";
+    private static final String PATH_PROP = "/src/test/resources/config.properties";
     private static final String PATH_FULL = System.getProperty("user.dir") + PATH_PROP;
     private static final Properties properties = new Properties();
 

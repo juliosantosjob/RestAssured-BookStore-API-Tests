@@ -12,9 +12,11 @@ import static com.toolsqa.bookstore.utils.Helpers.generateToken;
 
 import static org.apache.http.HttpStatus.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.empty;
+import static org.hamcrest.Matchers.equalTo;
 
-@Tag("criar_usuario")
 @Tag("regression")
+@Tag("criar_usuario")
 @DisplayName("Testes de criação de usuário")
 public class CreateUserTest extends BaseTest {
 
@@ -30,7 +32,10 @@ public class CreateUserTest extends BaseTest {
         response = createUser(user);
         response.then()
                 .statusCode(SC_CREATED)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/createUser/create-user-success.json"));
+                .body("username", equalTo(user.getUserName()))
+                .body("userID", equalTo(extractUserId(response)))
+                .body("books", empty())
+                .body(matchesJsonSchemaInClasspath("contracts/createUser/create-user-success.json"));
 
         String userId = extractUserId(response);
         String token = generateToken(user);
@@ -46,7 +51,9 @@ public class CreateUserTest extends BaseTest {
         response = createUser(user);
         response.then()
                 .statusCode(SC_BAD_REQUEST)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/createUser/create-user-empty-username.json"));
+                .body("code", equalTo("1200"))
+                .body("message", equalTo("UserName and Password required."))
+                .body(matchesJsonSchemaInClasspath("contracts/createUser/create-user-empty-username.json"));
     }
 
     @Test
@@ -61,7 +68,9 @@ public class CreateUserTest extends BaseTest {
         response = createUser(user);
         response.then()
                 .statusCode(SC_BAD_REQUEST)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/createUser/create-user-empty-password.json"));
+                .body("code", equalTo("1200"))
+                .body("message", equalTo("UserName and Password required."))
+                .body(matchesJsonSchemaInClasspath("contracts/createUser/create-user-empty-password.json"));
     }
 
     @Test
@@ -73,7 +82,9 @@ public class CreateUserTest extends BaseTest {
         response = createUser(user);
         response.then()
                 .statusCode(SC_BAD_REQUEST)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/createUser/create-user-empty-username.json"));
+                .body("code", equalTo("1200"))
+                .body("message", equalTo("UserName and Password required."))
+                .body(matchesJsonSchemaInClasspath("contracts/createUser/create-user-empty-username.json"));
     }
 
     @Test
@@ -88,7 +99,11 @@ public class CreateUserTest extends BaseTest {
         response = createUser(user);
         response.then()
                 .statusCode(SC_BAD_REQUEST)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/createUser/create-user-password-invalid-format.json"));
+                .body("code", equalTo("1300"))
+                .body("message", equalTo("Passwords must have at least one non alphanumeric character, " +
+                        "one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character " +
+                        "and Password must be eight characters or longer."))
+                .body(matchesJsonSchemaInClasspath("contracts/createUser/create-user-password-invalid-format.json"));
     }
 
     @Test
@@ -104,6 +119,8 @@ public class CreateUserTest extends BaseTest {
         response = createUser(user);
         response.then()
                 .statusCode(SC_NOT_ACCEPTABLE)
-                .body(matchesJsonSchemaInClasspath("resources/contracts/createUser/create-user-duplicate.json"));
+                .body("code", equalTo("1204"))
+                .body("message", equalTo("User exists!"))
+                .body(matchesJsonSchemaInClasspath("contracts/createUser/create-user-duplicate.json"));
     }
 }
