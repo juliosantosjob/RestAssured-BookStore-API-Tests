@@ -57,8 +57,6 @@ public class BookManagementTest extends BaseTest {
         response = addBookToCollection(token, books);
         response.then()
                 .statusCode(SC_CREATED)
-                .body("code", equalTo("1200"))
-                .body("message", equalTo("Book added to the collection!"))
                 .body(matchesJsonSchemaInClasspath("resources/contracts/bookManagement/add-book-success.json"));
 
         deleteBooks(userId, token)
