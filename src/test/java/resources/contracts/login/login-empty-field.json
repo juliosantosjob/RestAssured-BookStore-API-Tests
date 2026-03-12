@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "const": "1200"
+    },
+    "message": {
+      "type": "string",
+      "const": "UserName and Password required."
+    }
+  },
+  "required": ["code", "message"],
+  "additionalProperties": false
+}
+

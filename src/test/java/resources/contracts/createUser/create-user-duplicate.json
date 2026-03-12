@@ -1,0 +1,17 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "type": "object",
+  "properties": {
+    "code": {
+      "type": "string",
+      "const": "1204"
+    },
+    "message": {
+      "type": "string",
+      "const": "User exists!"
+    }
+  },
+  "required": ["code", "message"],
+  "additionalProperties": false
+}
+
