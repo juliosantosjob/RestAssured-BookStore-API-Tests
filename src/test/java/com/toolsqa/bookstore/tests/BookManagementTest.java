@@ -17,6 +17,7 @@ import static com.toolsqa.bookstore.utils.Helpers.generateToken;
 import static com.toolsqa.bookstore.utils.Helpers.readJson;
 import static org.apache.http.HttpStatus.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
+import static org.hamcrest.Matchers.equalTo;
 
 @Tag("gerenciar_livros")
 @Tag("regression")
@@ -51,10 +52,13 @@ public class BookManagementTest extends BaseTest {
         List<IsbnItem> collection = List.of(isbnItem);
         BookCollectionRequest books = new BookCollectionRequest(userId, collection);
         String token = generateToken(user);
+        deleteBooks(userId, token);
 
         response = addBookToCollection(token, books);
         response.then()
                 .statusCode(SC_CREATED)
+                .body("code", equalTo("1200"))
+                .body("message", equalTo("Book added to the collection!"))
                 .body(matchesJsonSchemaInClasspath("resources/contracts/bookManagement/add-book-success.json"));
 
         deleteBooks(userId, token)
