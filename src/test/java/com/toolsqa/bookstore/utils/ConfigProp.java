@@ -21,11 +21,11 @@ public class ConfigProp {
     public static String getProp(String key) {
         String value = System.getenv(key);
 
-        if (value == null || value.isBlank()) {
+        if (value == null || value.isEmpty()) {
             value = loadProp().getProperty(key);
         }
 
-        if (value == null || value.isBlank()) {
+        if (value == null || value.isEmpty()) {
             throw new IllegalStateException("Variável obrigatória não definida: " + key + ". Por favor, defina " +
                     "a variável de ambiente ou adicione-a ao arquivo 'secrets.properties'.");
         }

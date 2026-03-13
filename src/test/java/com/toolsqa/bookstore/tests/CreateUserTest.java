@@ -24,10 +24,7 @@ public class CreateUserTest extends BaseTest {
     @Tag("criar_com_sucesso")
     @DisplayName("Criar uma conta com sucesso")
     void shouldCreateUserSuccessfully() {
-        UserModel user = new UserModel(
-                "users" + faker.number().randomNumber(),
-                "Senha@123"
-        );
+        UserModel user = new UserModel("users" + faker.number().randomNumber(), "Senha@123");
 
         response = createUser(user);
         response.then()
@@ -60,10 +57,7 @@ public class CreateUserTest extends BaseTest {
     @Tag("password_em_branco")
     @DisplayName("Criar uma conta com password em branco")
     void shouldNotCreateUserWithEmptyPassword() {
-        UserModel user = new UserModel(
-                "user" + faker.number().randomNumber(),
-                ""
-        );
+        UserModel user = new UserModel("user" + faker.number().randomNumber(), "");
 
         response = createUser(user);
         response.then()
@@ -91,10 +85,7 @@ public class CreateUserTest extends BaseTest {
     @Tag("password_sem_caracteres_especiais")
     @DisplayName("Criar uma conta com password sem caracteres especiais")
     void shouldNotCreateUserWithoutSpecialCharacterInPassword() {
-        UserModel user = new UserModel(
-                "user" + faker.number().randomNumber(),
-                "Senha123"
-        );
+        UserModel user = new UserModel("user" + faker.number().randomNumber(), "Senha123");
 
         response = createUser(user);
         response.then()
@@ -110,10 +101,7 @@ public class CreateUserTest extends BaseTest {
     @Tag("username_duplicado")
     @DisplayName("Criar uma conta com os mesmos dados de uma conta já existente")
     void shouldNotCreateUserWithDuplicatedUsername() {
-        UserModel user = new UserModel(
-                "user" + faker.number().randomNumber(),
-                "Senha@123"
-        );
+        UserModel user = new UserModel("user" + faker.number().randomNumber(), "Senha@123");
 
         createUser(user);
         response = createUser(user);

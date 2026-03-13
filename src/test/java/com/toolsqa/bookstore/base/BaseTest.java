@@ -65,7 +65,6 @@ public class BaseTest implements Constants, Routes {
                     .body(user)
                     .when()
                     .post(CREATE_USER);
-
         } catch (Exception e) {
             logger.error("Erro ao criar usuário: {}", e.getMessage());
             throw new RuntimeException("Erro ao criar usuário: " + e.getMessage());

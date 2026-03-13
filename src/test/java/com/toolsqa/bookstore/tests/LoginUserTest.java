@@ -20,10 +20,7 @@ public class LoginUserTest extends BaseTest {
     @Tag("login_com_sucesso")
     @DisplayName("Login com sucesso")
     void shouldLoginSuccessfully() {
-        UserModel user = new UserModel(
-                getProp("USERNAME_VALID"),
-                getProp("PASSWORD_VALID")
-        );
+        UserModel user = new UserModel(getProp("USERNAME_VALID"), getProp("PASSWORD_VALID"));
 
         response = loginUser(user);
         response.then()
@@ -39,10 +36,7 @@ public class LoginUserTest extends BaseTest {
     @Tag("username_invalido")
     @DisplayName("Login com username inválido")
     void shouldNotLoginWithInvalidUsername() {
-        UserModel user = new UserModel(
-                "invalidUser",
-                getProp("PASSWORD_VALID")
-        );
+        UserModel user = new UserModel("invalidUser", getProp("PASSWORD_VALID"));
 
         response = loginUser(user);
         response.then()
@@ -55,10 +49,7 @@ public class LoginUserTest extends BaseTest {
     @Tag("password_invalido")
     @DisplayName("Login com password inválido")
     void shouldNotLoginWithInvalidPassword() {
-        UserModel user = new UserModel(
-                getProp("USERNAME_VALID"),
-                "invalidPassword"
-        );
+        UserModel user = new UserModel(getProp("USERNAME_VALID"), "invalidPassword");
 
         response = loginUser(user);
         response.then()
@@ -71,10 +62,7 @@ public class LoginUserTest extends BaseTest {
     @Tag("username_e_password_invalidos")
     @DisplayName("Login com username e password inválidos")
     void shouldNotLoginWithInvalidUsernameAndPassword() {
-        UserModel user = new UserModel(
-                "invalidUser",
-                "invalidPassword"
-        );
+        UserModel user = new UserModel("invalidUser", "invalidPassword");
 
         response = loginUser(user);
         response.then()
@@ -87,10 +75,7 @@ public class LoginUserTest extends BaseTest {
     @Tag("username_em_branco")
     @DisplayName("Login com username em branco")
     void shouldNotLoginWithEmptyUsername() {
-        UserModel user = new UserModel(
-                "",
-                getProp("PASSWORD_VALID")
-        );
+        UserModel user = new UserModel("", getProp("PASSWORD_VALID"));
 
         response = loginUser(user);
         response.then()
@@ -103,10 +88,7 @@ public class LoginUserTest extends BaseTest {
     @Tag("password_em_branco")
     @DisplayName("Login com password em branco")
     void shouldNotLoginWithEmptyPassword() {
-        UserModel user = new UserModel(
-                getProp("USERNAME_VALID"),
-                ""
-        );
+        UserModel user = new UserModel(getProp("USERNAME_VALID"), "");
 
         response = loginUser(user);
         response.then()

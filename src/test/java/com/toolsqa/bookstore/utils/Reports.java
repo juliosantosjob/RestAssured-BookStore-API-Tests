@@ -13,7 +13,6 @@ public class Reports {
                         "Status Code: " + response.getStatusCode() + "\n" +
                         "Headers: " + response.getHeaders() + "\n" +
                         "Body: " + response.getBody().asString();
-
                 Allure.addAttachment("API Response", "text/plain", resp);
             }
         } catch (Exception e) {
