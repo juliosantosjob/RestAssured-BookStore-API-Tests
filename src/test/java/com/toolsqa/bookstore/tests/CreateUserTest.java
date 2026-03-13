@@ -25,7 +25,7 @@ public class CreateUserTest extends BaseTest {
     @DisplayName("Criar uma conta com sucesso")
     void shouldCreateUserSuccessfully() {
         UserModel user = new UserModel(
-                "user" + faker.number().randomNumber(),
+                "users" + faker.number().randomNumber(),
                 "Senha@123"
         );
 

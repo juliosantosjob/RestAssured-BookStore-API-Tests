@@ -3,8 +3,8 @@ package com.toolsqa.bookstore.tests;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import com.toolsqa.bookstore.base.BaseTest;
-import com.toolsqa.bookstore.models.BookCollectionRequest;
-import com.toolsqa.bookstore.models.IsbnItem;
+import com.toolsqa.bookstore.models.BookCollectionModel;
+import com.toolsqa.bookstore.models.IsbnItemModel;
 import com.toolsqa.bookstore.models.UserModel;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Tag;
@@ -51,10 +51,10 @@ public class BookManagementTest extends BaseTest {
         String userId = getProp("USER_ID_VALID");
 
         UserModel user = new UserModel(username, password);
-        IsbnItem isbnItem = new IsbnItem(isbn);
+        IsbnItemModel isbnItem = new IsbnItemModel(isbn);
 
-        List<IsbnItem> collection = List.of(isbnItem);
-        BookCollectionRequest books = new BookCollectionRequest(userId, collection);
+        List<IsbnItemModel> collection = List.of(isbnItem);
+        BookCollectionModel books = new BookCollectionModel(userId, collection);
         String token = generateToken(user);
         deleteBooks(userId, token);
 
@@ -77,10 +77,10 @@ public class BookManagementTest extends BaseTest {
         String userId = getProp("USER_ID_VALID");
 
         UserModel user = new UserModel(username, password);
-        IsbnItem isbnItem = new IsbnItem("0000000000000");
+        IsbnItemModel isbnItem = new IsbnItemModel("0000000000000");
 
-        List<IsbnItem> collection = List.of(isbnItem);
-        BookCollectionRequest books = new BookCollectionRequest(userId, collection);
+        List<IsbnItemModel> collection = List.of(isbnItem);
+        BookCollectionModel books = new BookCollectionModel(userId, collection);
 
         String token = generateToken(user);
         response = addBookToCollection(token, books);

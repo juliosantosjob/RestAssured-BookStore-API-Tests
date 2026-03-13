@@ -1,6 +1,6 @@
 package com.toolsqa.bookstore.runners;
 
-import com.toolsqa.bookstore.tests.AccountDeletionTest;
+import com.toolsqa.bookstore.tests.DeleteUserTest;
 import com.toolsqa.bookstore.tests.BookManagementTest;
 import com.toolsqa.bookstore.tests.CreateUserTest;
 import com.toolsqa.bookstore.tests.LoginUserTest;
@@ -15,7 +15,7 @@ import org.junit.platform.suite.api.Suite;
 @DisplayName("Automação - Bookstore")
 @SelectPackages("com.toolsqa.bookstore.tests.tests")
 @SelectClasses({
-        AccountDeletionTest.class,
+        DeleteUserTest.class,
         BookManagementTest.class,
         CreateUserTest.class,
         LoginUserTest.class

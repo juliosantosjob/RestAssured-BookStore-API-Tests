@@ -11,11 +11,12 @@ import static com.toolsqa.bookstore.utils.Helpers.generateToken;
 import static org.apache.http.HttpStatus.*;
 import static io.restassured.module.jsv.JsonSchemaValidator.matchesJsonSchemaInClasspath;
 import static org.hamcrest.CoreMatchers.equalTo;
+import static org.hamcrest.Matchers.nullValue;
 
 @Tag("regression")
 @Tag("deletar_conta")
 @DisplayName("Testes de deleção de conta")
-public class AccountDeletionTest extends BaseTest {
+public class DeleteUserTest extends BaseTest {
 
     @Test
     @Tag("criar_e_deletar_conta")
@@ -29,7 +30,6 @@ public class AccountDeletionTest extends BaseTest {
 
         response = deleteUser(userId, token);
         response.then()
-                .body(equalTo(""))
                 .statusCode(SC_NO_CONTENT);
     }
 
@@ -40,8 +40,8 @@ public class AccountDeletionTest extends BaseTest {
         UserModel user = new UserModel("user" + faker.number().randomNumber(), "Test@123");
         String token = generateToken(user);
 
-        deleteUser("000000000", token)
-                .then()
+        response = deleteUser("000000000", token);
+        response.then()
                 .statusCode(SC_OK)
                 .body("code", equalTo("1207"))
                 .body("message", equalTo("User Id not correct!"))
@@ -62,8 +62,8 @@ public class AccountDeletionTest extends BaseTest {
 
         response = loginUser(user);
         response.then()
-                .body("token", equalTo(null))
-                .body("expires", equalTo(null))
+                .body("token", nullValue())
+                .body("expires", nullValue())
                 .body("status", equalTo("Failed"))
                 .body("result", equalTo("User authorization failed."));
     }

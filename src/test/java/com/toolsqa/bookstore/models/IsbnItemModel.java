@@ -1,13 +1,12 @@
 package com.toolsqa.bookstore.models;
 
-public class IsbnItem {
+public class IsbnItemModel {
 
     private String isbn;
 
-    public IsbnItem() {
-    }
+    public IsbnItemModel() {}
 
-    public IsbnItem(String isbn) {
+    public IsbnItemModel(String isbn) {
         this.isbn = isbn;
     }
 

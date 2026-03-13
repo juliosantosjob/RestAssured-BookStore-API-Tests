@@ -2,15 +2,14 @@ package com.toolsqa.bookstore.models;
 
 import java.util.List;
 
-public class BookCollectionRequest {
+public class BookCollectionModel {
 
     private String userId;
-    private List<IsbnItem> collectionOfIsbns;
+    private List<IsbnItemModel> collectionOfIsbns;
 
-    public BookCollectionRequest(String userIdValid, String isbn) {
-    }
+    public BookCollectionModel(String userIdValid, String isbn) {}
 
-    public BookCollectionRequest(String userId, List<IsbnItem> collectionOfIsbns) {
+    public BookCollectionModel(String userId, List<IsbnItemModel> collectionOfIsbns) {
         this.userId = userId;
         this.collectionOfIsbns = collectionOfIsbns;
     }
@@ -23,11 +22,11 @@ public class BookCollectionRequest {
         this.userId = userId;
     }
 
-    public List<IsbnItem> getCollectionOfIsbns() {
+    public List<IsbnItemModel> getCollectionOfIsbns() {
         return collectionOfIsbns;
     }
 
-    public void setCollectionOfIsbns(List<IsbnItem> collectionOfIsbns) {
+    public void setCollectionOfIsbns(List<IsbnItemModel> collectionOfIsbns) {
         this.collectionOfIsbns = collectionOfIsbns;
     }
 }
