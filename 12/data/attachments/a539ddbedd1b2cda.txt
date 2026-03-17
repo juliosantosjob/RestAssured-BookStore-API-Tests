@@ -1,0 +1,9 @@
+Status Code: 200
+Headers: Server=nginx/1.17.10 (Ubuntu)
+Date=Tue, 17 Mar 2026 13:09:26 GMT
+Content-Type=application/json; charset=utf-8
+Content-Length=85
+Connection=keep-alive
+X-Powered-By=Express
+ETag=W/"55-uDqoBYBzbvMfwcbBiE9kdrLOtHY"
+Body: {"token":null,"expires":null,"status":"Failed","result":"User authorization failed."}
