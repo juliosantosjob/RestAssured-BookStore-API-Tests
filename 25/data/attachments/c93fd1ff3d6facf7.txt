@@ -1,0 +1,9 @@
+Status Code: 400
+Headers: Server=nginx/1.17.10 (Ubuntu)
+Date=Wed, 25 Mar 2026 20:37:42 GMT
+Content-Type=application/json; charset=utf-8
+Content-Length=230
+Connection=keep-alive
+X-Powered-By=Express
+ETag=W/"e6-Suxub+fxI99/3YEWz5cjyd3KlvQ"
+Body: {"code":"1300","message":"Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer."}
