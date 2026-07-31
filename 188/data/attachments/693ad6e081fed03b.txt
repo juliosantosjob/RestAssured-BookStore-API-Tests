@@ -1,7 +1,0 @@
-Status Code: 204
-Headers: Server=nginx/1.17.10 (Ubuntu)
-Date=Fri, 17 Jul 2026 13:23:12 GMT
-Connection=keep-alive
-X-Powered-By=Express
-ETag=W/"58-rkQWyt77cSAzOZ8f4ZM3ns+EGFk"
-Body: 
