@@ -1,0 +1,9 @@
+Status Code: 201
+Headers: Server=nginx/1.17.10 (Ubuntu)
+Date=Mon, 21 Sep 2026 23:00:47 GMT
+Content-Type=application/json; charset=utf-8
+Content-Length=86
+Connection=keep-alive
+X-Powered-By=Express
+ETag=W/"56-BW+peAyxUjW/JnWBZ8BTt52UeUU"
+Body: {"userID":"f88033d8-c658-44e1-b1b9-fa547938b984","username":"users8412160","books":[]}
