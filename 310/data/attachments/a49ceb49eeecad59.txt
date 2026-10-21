@@ -1,9 +1,0 @@
-Status Code: 200
-Headers: Server=nginx/1.17.10 (Ubuntu)
-Date=Wed, 14 Oct 2026 16:32:17 GMT
-Content-Type=application/json; charset=utf-8
-Content-Length=288
-Connection=keep-alive
-X-Powered-By=Express
-ETag=W/"120-SBax/ywu27Rmz4JSEOqaBl/anZU"
-Body: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6IlRpbGxtYW5fTW9zY2lza2k0MyIsInBhc3N3b3JkIjoiTXVkYXJAMTIzIiwiaWF0IjoxNzkxOTk1NTM2fQ.vWkSW6aMy34vig328u11h2PZieeDDfYU2ZYUYzjMWuw","expires":"2026-10-21T16:32:16.030Z","status":"Success","result":"User authorized successfully."}
